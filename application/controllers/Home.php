@@ -7,15 +7,15 @@ class Home extends CI_Controller
 
     public function index()
     {
-        $config['js'] = array('jquery-3.2.1.min');
-        $config['css'] = array('home');
+        $config['js'] = array('jquery-3.2.1.min', 'bootstrap', 'home/home.send');
+        $config['css'] = array('bootstrap.min');
         $this->resources->initialize($config);
         $this->load->view('home');
     }
 
     public function calculo()
     {
-        return false;
+        echo json_encode($this->input->post());
     }
 
 }
