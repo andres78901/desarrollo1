@@ -3,10 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <title><?= _('Dev') ?></title>
-        <?php
-        echo $this->resources->css();
-        echo $this->resources->js()
-        ?>
+        <?= $this->resources->css() ?>
+        <?= $this->resources->js() ?>
     </head>
     <body>
         <form method="post" action="">
