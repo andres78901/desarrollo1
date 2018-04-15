@@ -17,12 +17,22 @@ class Home extends CI_Controller
         $partsModal = $this->load->view('Home/loginViewParts', '', true);
         $partsMenu = $this->load->view('Home/menuViewParts', '', true);
         $partsSlide = $this->load->view('Home/slideViewParts', '', true);
+        /**
+         * Constructores de contenido
+         */
         $partExperien = $this->load->view('Home/experiencieViewParts', $dato, true);
+        $partNews = $this->load->view('New/parts/partsNews', $dato, true);
+        $News = $this->load->view('New/newsHome', $dato, true);
+        /**
+         * Vistas a cargar
+         */
         $array = array(
             'partLogin' => $partsModal,
             'partMenu' => $partsMenu,
             'partSlide' => $partsSlide,
             'partExperien' => $partExperien,
+            'partNews' => $partNews,
+            'news' => $News,
             'titleModal' => ucwords(_('identificacion')));
         $this->load->view('Home/viewLogin', $array, false);
     }
@@ -42,6 +52,11 @@ class Home extends CI_Controller
         }
     }
 
+    public function calculo()
+    {
+        echo json_encode($this->input->post());
+    }
+
     private function makeSession()
     {
         $this->load->model('login');
@@ -59,11 +74,6 @@ class Home extends CI_Controller
         } else {
             return false;
         }
-    }
-
-    public function calculo()
-    {
-        echo json_encode($this->input->post());
     }
 
 }

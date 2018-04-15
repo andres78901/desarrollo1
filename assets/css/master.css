@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 
 div[class^='col-']{
-    border: 5px solid white;
+    border: 18px solid white;
 }
 /**
 Coloracion del error arrojado
