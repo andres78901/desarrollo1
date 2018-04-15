@@ -9,7 +9,7 @@
 /**
  * Description of Login
  *
- * @author Andres
+ * @author Andres Lopez <andres.lopez7890@gmail.com>
  */
 class Login extends CI_Model
 {
@@ -24,7 +24,7 @@ class Login extends CI_Model
 
     public function conexion($datos = array())
     {
-        if(empty($datos)){
+        if (empty($datos)) {
             return false;
         }
         $parameters = array('usuario' => $datos['user'], 'password' => $datos['pass']);

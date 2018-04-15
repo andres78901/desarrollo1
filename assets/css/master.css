@@ -1,0 +1,26 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 14/04/2018, 04:02:20 PM
+    Author     : Andres Lopez <andres.lopez7890@gmail.com>
+*/
+
+div[class^='col-']{
+    border: 5px solid white;
+}
+/**
+Coloracion del error arrojado
+*/
+.error{
+    font-size: 75%;
+    color: red;
+}
+/*
+mascara para la caja de texto de la contaseña
+*/
+#pass{
+    -webkit-text-security: disc;
+}

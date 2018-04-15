@@ -7,24 +7,33 @@ class Home extends CI_Controller
 
     public function index()
     {
-        $config['js'] = array('jquery-3.2.1.min', 'popper.min', 'bootstrap');
-        $config['css'] = array('bootstrap.min');
+        $config['js'] = array(
+            'jquery-3.2.1.min', 'bootstrap', 'jquery.validate.min',
+            'home/login.send', 'home/liveChat'
+        );
+        $config['css'] = array('bootstrap.min', 'master');
+        $this->resources->initialize($config);
 
-        if (isset($_SESSION['validado'])) {
-            $this->resources->initialize($config);
-            $this->load->view('home');
-        } else {
-            $config['js'] = array_merge($config['js'], array('home/login.send'));
-            $this->resources->initialize($config);
-            $this->load->view('login');
-        }
+        $partsModal = $this->load->view('Home/loginViewParts', '', true);
+        $partsMenu = $this->load->view('Home/menuViewParts', '', true);
+        $partsSlide = $this->load->view('Home/slideViewParts', '', true);
+        $array = array(
+            'partLogin' => $partsModal,
+            'partMenu' => $partsMenu,
+            'partSlide' => $partsSlide,
+            'titleModal' => ucwords(_('identificacion')));
+        $this->load->view('Home/viewLogin', $array, false);
     }
 
     public function login()
     {
         if ($this->input->post('send')) {
             if ($this->makeSession()) {
-                echo json_encode(array('valido' => true));
+                $result = array(
+                    'valido' => true,
+                    'uri' => 'Admin/desarrollo'
+                );
+                echo json_encode($result);
             } else {
                 echo json_encode(array('valido' => false));
             }
@@ -39,9 +48,8 @@ class Home extends CI_Controller
         $resul = $this->login->conexion(array('user' => $user, 'pass' => $pass));
 
         if ($resul) {
-//            var_dump($resul);
-            session_start();
             foreach ($resul as $item) {
+                $_SESSION['identificacion'] = $item->cedula;
                 $_SESSION['usuario'] = "{$item->nombres} {$item->apellidos}";
             }
             $_SESSION['validado'] = true;

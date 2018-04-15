@@ -31,7 +31,7 @@ class Resources
         $CI = & get_instance();
         $CI->load->helper('url');
         $CI->load->helper('html');        
-        foreach ($params as $key => $val) {
+        foreach ($params as $key => $val) {            
             if (isset($this->$key)) {
                 $this->$key = $val;
             }
