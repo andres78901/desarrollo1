@@ -13,14 +13,16 @@ class Home extends CI_Controller
         );
         $config['css'] = array('bootstrap.min', 'master');
         $this->resources->initialize($config);
-
+        $dato = array('title' => 'Ejemplo', 'essay' => '<p>Ejemplo caragado desde el controlado queda pendiente el cargue desde la base de datos con respectiva tabala y sus campos y las naturalezas de estos; adicional a esto hay que mirar como se da solocion para la jsutificacion del texto<p>');
         $partsModal = $this->load->view('Home/loginViewParts', '', true);
         $partsMenu = $this->load->view('Home/menuViewParts', '', true);
         $partsSlide = $this->load->view('Home/slideViewParts', '', true);
+        $partExperien = $this->load->view('Home/experiencieViewParts', $dato, true);
         $array = array(
             'partLogin' => $partsModal,
             'partMenu' => $partsMenu,
             'partSlide' => $partsSlide,
+            'partExperien' => $partExperien,
             'titleModal' => ucwords(_('identificacion')));
         $this->load->view('Home/viewLogin', $array, false);
     }

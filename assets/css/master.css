@@ -24,3 +24,6 @@ mascara para la caja de texto de la contaseña
 #pass{
     -webkit-text-security: disc;
 }
+p{
+    text-align:justify;
+}
