@@ -27,3 +27,8 @@ mascara para la caja de texto de la contaseña
 p{
     text-align:justify;
 }
+
+.errorForm{
+    font-size: 90%;
+    color: red;
+}

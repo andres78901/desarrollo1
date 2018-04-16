@@ -17,22 +17,32 @@ class Desarrollo extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+
         $config['js'] = array(
-            'jquery-3.2.1.min', 'popper.min',
+            'jquery-3.2.1.min', 'jquery.validate.min',
             'bootstrap', 'Admin/jsAdmin'
         );
-        $config['css'] = array('bootstrap.min');
+        $config['css'] = array('bootstrap.min', 'master');
         $this->resources->initialize($config);
         $this->load->helper('url');
     }
 
     public function index()
     {
+        if (!isset($_SESSION['usuario'])) {
+            redirect();
+        }
         $this->load->model('admin/dev');
-        $result = $this->dev->permisos($_SESSION['identificacion']);
+        $valores = array('nameUser' => $_SESSION['usuario']);
+        $menu = $this->load->view('Admin/adminPartMenu', $valores, true);
+        $contenido = array(
+            'titulo' => ucwords(_('crear usuario')),
+            'formMakeUser' => $this->makeUser()
+        );
+        $home = $this->load->view('Admin/adminPartHome', $contenido, true);
         $datos = array(
-            'sesion' => $result,
-            'usuario' => $_SESSION['usuario'],
+            'menu' => $menu,
+            'body' => $home
         );
         $this->load->view('Admin/viewAdmin', $datos);
     }
@@ -58,6 +68,20 @@ class Desarrollo extends CI_Controller
             )
         );
         echo json_encode($result);
+    }
+
+    private function makeUser()
+    {
+        $result = $this->load->view('Admin/usuario/makeUser', '', true);
+        return $result;
+    }
+
+    function __P($text = "", $die = false)
+    {
+        print_r($text);
+        if ($die) {
+            die;
+        }
     }
 
 }
